@@ -1,11 +1,12 @@
 const mongodb = require('mongodb')
 const mapLimit = require('promise-map-limit')
+const {PromiseBulk} = require('../src')
 
 const MONGO_URI = process.env.MONGO_URI ?? 'mongodb://localhost/bulk_node'
 const ITEMS_COUNT = Number(process.env.ITEMS_COUNT ?? 10 * 1000)
 const ITEMS_SIZE = Number(process.env.ITEMS_SIZE ?? 5)
 const ITEMS_PROPERTIES_SIZE = Number(process.env.ITEMS_PROPERTIES_SIZE ?? 30)
-const INSERT_CONCURRENCY = Number(process.env.INSERT_CONCURRENCY ?? 2)
+const INSERT_CONCURRENCY = Number(process.env.INSERT_CONCURRENCY ?? 100)
 
 function generateItem(itemSize, itemPropertiesSize, identifier = 0) {
     return {
@@ -67,6 +68,12 @@ async function testLibrary(db, items) {
     return finalResult
 }
 
+async function testPromiseBulk(db, items) {
+    const context = new PromiseBulk((items) => db.collection('test_promise_bulk').insertMany(items), 10)
+    const finalResult = await Promise.all(items.map(e => context.execute(e)))
+    return finalResult
+}
+
 /**
  * 
  * @param {mongodb.Db} db 
@@ -111,6 +118,9 @@ async function main(itemsCount, itemsSize, itemsPropertiesSize, insertConcurrenc
     console.time('library')
     await testLibrary(db, items), 
     console.timeEnd('library')
+    console.time('promise-bulk')
+    await testPromiseBulk(db, items), 
+    console.timeEnd('promise-bulk')
     await client.close()
 
 }
