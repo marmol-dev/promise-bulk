@@ -1,6 +1,6 @@
 {
   "name": "promise-bulk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Write efficient bulk algorithms without modifying your existing codebase.",
   "main": "index.js",
   "scripts": {},
