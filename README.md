@@ -1,5 +1,5 @@
 
-[![NPM](https://nodei.co/npm/express.png?compact=true)](https://npmjs.org/package/express)
+[![NPM](https://nodei.co/npm/promise-bulk.png?compact=true)](https://npmjs.org/package/promise-bulk)
 
 Write efficient bulk algorithms without modifying your existing codebase.
 
@@ -26,8 +26,8 @@ Allows to insert items in a atomic way but doing a efficient bulk operation in t
 
 Imagine you have two functions:
 
-- insertInDatabaseOneItem
-- insertInDatabaseManyItemsAtOnce
+- `insertInDatabaseOneItem`
+- `insertInDatabaseManyItemsAtOnce`
 
 What do you think is more efficient: call the first function 100 times or the second function one time with 100 items?
 
@@ -64,14 +64,18 @@ With this library we can convert the atomic insert of one comment into a grouped
 
 Atomic:
 
-![Atomic](./docs/atomic.png)
+![Atomic](https://github.com/tomymolina/promise-bulk/raw/master/docs/atomic.png)
 
-And with bulk:
+And with `promise-bulk`:
 
-![Bulk](./docs/bulk.png)
+![Bulk](https://github.com/tomymolina/promise-bulk/raw/master/docs/bulk.png)
 
 The example total time is near 2x times faster in bulk scenario.
 
 # Real use case
 
 See [examples/mongo/README.md](./examples/mongo/README.md) for real results and performance.
+
+# License
+
+[License](./LICENSE.md)
