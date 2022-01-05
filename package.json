@@ -1,11 +1,24 @@
 {
   "name": "promise-bulk",
   "version": "1.0.0",
-  "description": "",
+  "description": "Write efficient bulk algorithms without modifying your existing codebase.",
   "main": "index.js",
   "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "bulk",
+    "promise",
+    "performance",
+    "efficient",
+    "atomic",
+    "many",
+    "single"
+  ],
+  "author": "Martín Molina Álvarez",
+  "repository": "tomymolina/promise-bulk",
+  "contributors": [
+    "Francisco Rojas Rodríguez",
+    "Martín Molina Álvarez"
+  ],
+  "license": "Apache-2.0",
   "dependencies": {}
 }
