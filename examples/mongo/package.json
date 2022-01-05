@@ -1,0 +1,20 @@
+{
+  "name": "promise-bulk-examples-mongo",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node insert"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^4.2.2",
+    "promise-bulk": "file:../../",
+    "promise-map-limit": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^4.0.7"
+  }
+}
