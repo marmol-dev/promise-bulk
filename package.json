@@ -3,7 +3,10 @@
   "version": "1.0.2",
   "description": "Write efficient bulk algorithms without modifying your existing codebase.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch"
+  },
   "keywords": [
     "bulk",
     "promise",
@@ -20,5 +23,8 @@
     "Martín Molina Álvarez"
   ],
   "license": "Apache-2.0",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
 }

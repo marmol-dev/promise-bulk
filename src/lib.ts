@@ -1,13 +1,15 @@
 
-class PromiseBulkSingle {
-    constructor(executeBulk = null) {
-        this._executionItemsPromise = Promise.resolve()
-        this._pendingItems = []
-        this._free = true
-        this._executeBulk = executeBulk
-    }
+export type ExecuteBulkFn<I,O> = (items: I[]) => Promise<O[]>
 
-    async execute(item) {
+class PromiseBulkSingle<I,O> {
+    private _executionItemsPromise: Promise<O[]> = Promise.resolve([])
+    private _pendingItems = []
+    private _free = true
+
+
+    constructor(private readonly _executeBulk: ExecuteBulkFn<I,O>) {}
+
+    async execute(item: I) {
         const newSize = this._pendingItems.push(item)
         const myIndex = newSize - 1
 
@@ -52,14 +54,16 @@ class PromiseBulkSingle {
 
 }
 
-module.exports.PromiseBulk = class PromiseBulk {
-    constructor(executeBulk = null, concurrency = 1) {
+export class PromiseBulk<I = unknown, O = unknown> {
+    private _index = 0
+    private readonly _bulks: PromiseBulkSingle<I,O>[]
+
+    constructor(executeBulk: ExecuteBulkFn<I,O>, private readonly _concurrency = 1) {
         this._index = 0
-        this._concurrency = concurrency
-        this._bulks = Array.from({length: concurrency}, () => new PromiseBulkSingle(executeBulk))
+        this._bulks = Array.from({length: _concurrency}, () => new PromiseBulkSingle(executeBulk))
     }
 
-    async execute(item) {
+    async execute(item: I) {
         const index = this._index
         this._index = (this._index+1) % this._concurrency
         return this._bulks[index].execute(item)
