@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "Write efficient bulk algorithms without modifying your existing codebase.",
   "main": "dist/index.js",
+  "homepage": "https://tomymolina.github.io/promise-bulk",
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
