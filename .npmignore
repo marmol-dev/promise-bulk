@@ -4,3 +4,5 @@ node_modules/
 docs/
 static/
 src/
+typedoc.json
+tsconfig.json
