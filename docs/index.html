@@ -1,0 +1,56 @@
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>promise-bulk</title><meta name="description" content="Documentation for promise-bulk"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">promise-bulk</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>promise-bulk</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography"><p><a href="https://npmjs.org/package/promise-bulk"><img src="https://nodei.co/npm/promise-bulk.png?compact=true" alt="NPM"></a></p>
+<p>Write efficient bulk algorithms without modifying your existing codebase.</p>
+<pre><code class="language-js"><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">app</span><span class="hl-2"> = </span><span class="hl-3">express</span><span class="hl-2">()</span><br/><span class="hl-1">app</span><span class="hl-2">.</span><span class="hl-3">post</span><span class="hl-2">(</span><span class="hl-7">&#39;/comments&#39;</span><span class="hl-2">, </span><span class="hl-5">async</span><span class="hl-2"> (</span><span class="hl-1">req</span><span class="hl-2">, </span><span class="hl-1">res</span><span class="hl-2">) </span><span class="hl-5">=&gt;</span><span class="hl-2"> {</span><br/><span class="hl-2">    </span><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">bodyComment</span><span class="hl-2"> = </span><span class="hl-1">req</span><span class="hl-2">.</span><span class="hl-1">body</span><br/><span class="hl-2">    </span><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">insertedComment</span><span class="hl-2"> = </span><span class="hl-8">await</span><span class="hl-2"> </span><span class="hl-1">insertBulkInstance</span><span class="hl-2">.</span><span class="hl-3">execute</span><span class="hl-2">(</span><span class="hl-1">bodyComment</span><span class="hl-2">)</span><br/><span class="hl-2">    </span><span class="hl-1">res</span><span class="hl-2">.</span><span class="hl-3">json</span><span class="hl-2">(</span><span class="hl-1">insertedComment</span><span class="hl-2">)</span><br/><span class="hl-2">})</span>
+</code></pre>
+<p>What is <code>insertBulkInstance</code>?</p>
+<pre><code class="language-js"><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">insertBulkInstance</span><span class="hl-2"> = </span><span class="hl-5">new</span><span class="hl-2"> </span><span class="hl-3">PromiseBulk</span><span class="hl-2">((</span><span class="hl-1">commentsArr</span><span class="hl-2">) </span><span class="hl-5">=&gt;</span><span class="hl-2"> {</span><br/><span class="hl-2">    </span><span class="hl-8">return</span><span class="hl-2"> </span><span class="hl-1">db</span><span class="hl-2">.</span><span class="hl-3">collection</span><span class="hl-2">(</span><span class="hl-7">&#39;comments&#39;</span><span class="hl-2">).</span><span class="hl-3">insertMany</span><span class="hl-2">(</span><span class="hl-1">commentsArr</span><span class="hl-2">)</span><br/><span class="hl-2">})</span>
+</code></pre>
+<p>Allows to insert items in a atomic way but doing a efficient bulk operation in the background.</p>
+
+<a href="#when-i-should-use-this" id="when-i-should-use-this" style="color: inherit; text-decoration: none;">
+  <h1>When I should use this?</h1>
+</a>
+<p>Imagine you have two functions:</p>
+<ul>
+<li><code>insertInDatabaseOneItem</code></li>
+<li><code>insertInDatabaseManyItemsAtOnce</code></li>
+</ul>
+<p>What do you think is more efficient: call the first function 100 times or the second function one time with 100 items?</p>
+<p>Depending on your database system, probabily the second option is much more efficient. </p>
+<p>So, whats the problem?</p>
+<p>Our existing logic is frequently written for 1 item so in many scenarios is complex to write it for many items.</p>
+<p>This library allows to easily convert the calls from one item (<code>insertInDatabaseOneItem</code> in the example) into calls of many items (<code>insertInDatabaseManyItemsAtOnce</code> in the example).</p>
+
+<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+  <h1>Install</h1>
+</a>
+<p><code>npm install --save promise-bulk</code></p>
+<p>or</p>
+<p><code>yarn add promise-bulk</code></p>
+<p>or</p>
+<p><code>pnpm add --save pnpm</code></p>
+
+<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+  <h1>Example</h1>
+</a>
+<p>We have the scenario of a comments platform that receives so many comments per second using a REST API.
+Every REST API call inserts a SINGLE comment into the database. </p>
+<p>With 100 users sending comments per second we are executing 100 <code>database.insertOne(comment)</code> in parallel.</p>
+<p>Despite of being more efficient to insert all the comments at once, refactoring this code to do <code>database.insertMany(commentsList)</code> is hard to implement.</p>
+<p>With this library we can convert the atomic insert of one comment into a grouped insert of many comments.</p>
+<p>Atomic:</p>
+<p><img src="https://github.com/tomymolina/promise-bulk/raw/master/docs/atomic.png" alt="Atomic"></p>
+<p>And with <code>promise-bulk</code>:</p>
+<p><img src="https://github.com/tomymolina/promise-bulk/raw/master/docs/bulk.png" alt="Bulk"></p>
+<p>The example total time is near 2x times faster in bulk scenario.</p>
+
+<a href="#real-use-case" id="real-use-case" style="color: inherit; text-decoration: none;">
+  <h1>Real use case</h1>
+</a>
+<p>See <a href="./examples/mongo/README.md">examples/mongo/README.md</a> for real results and performance.</p>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h1>License</h1>
+</a>
+<p><a href="./LICENSE.md">License</a></p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/PromiseBulk.html" class="tsd-kind-icon">Promise<wbr/>Bulk</a></li><li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="modules.html#ExecuteBulkFn" class="tsd-kind-icon">Execute<wbr/>Bulk<wbr/>Fn</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>

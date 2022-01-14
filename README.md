@@ -51,6 +51,10 @@ or
 
 `pnpm add --save pnpm`
 
+# Documentation
+
+Detailed information and documentation about this library can be found in [docs](https://tomymolina.github.io/promise-bulk/).
+
 # Example
 
 We have the scenario of a comments platform that receives so many comments per second using a REST API.
