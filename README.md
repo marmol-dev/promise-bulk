@@ -53,7 +53,7 @@ or
 
 # Documentation
 
-Detailed information and documentation about this library can be found in [docs](https://tomymolina.github.io/promise-bulk/).
+Detailed information and documentation about this library and how to use it can be found in [docs](https://tomymolina.github.io/promise-bulk/modules.html).
 
 # Example
 
@@ -68,11 +68,11 @@ With this library we can convert the atomic insert of one comment into a grouped
 
 Atomic:
 
-![Atomic](https://github.com/tomymolina/promise-bulk/raw/master/docs/atomic.png)
+![Atomic](https://github.com/tomymolina/promise-bulk/raw/master/static/atomic.png)
 
 And with `promise-bulk`:
 
-![Bulk](https://github.com/tomymolina/promise-bulk/raw/master/docs/bulk.png)
+![Bulk](https://github.com/tomymolina/promise-bulk/raw/master/static/bulk.png)
 
 The example total time is near 2x times faster in bulk scenario.
 

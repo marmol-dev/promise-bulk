@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "docs": "typedoc"
+    "build:docs": "typedoc"
   },
   "keywords": [
     "bulk",
