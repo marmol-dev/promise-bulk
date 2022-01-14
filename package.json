@@ -2,7 +2,7 @@
   "name": "promise-bulk",
   "version": "1.0.2",
   "description": "Write efficient bulk algorithms without modifying your existing codebase.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
