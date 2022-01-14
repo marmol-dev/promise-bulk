@@ -8,7 +8,9 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "build:docs": "typedoc",
-    "np": "np"
+    "np": "np",
+    "clean": "rm -rf dist/",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "keywords": [
     "bulk",
